@@ -18,6 +18,7 @@
   "homepage": "https://github.com/yashgokakkar99/MERNBackend#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "hbs": "^4.2.0",
     "node": "^18.13.0"
   }
 }
