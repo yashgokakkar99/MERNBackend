@@ -5,6 +5,7 @@ const hbs = require("hbs");
 const partials_path = path.join(__dirname, "../views/partials");
 const port = process.env.PORT || 3000
 const Register = require("./models/formSchema")
+const log = require("./models/logSchema")
 
 
 // Database connectivity
@@ -56,6 +57,27 @@ app.post('/register', async(req, res)=>{
 
 app.get('/login', (req, res) => {
   res.render("login")
+})
+
+app.post('/login',async (req,res)=>{
+  try{
+    const email1 = req.body.em
+    const password1 = req.body.pass
+    const useremail = await Register.findOne({email:email1})
+    if(useremail.password === password1){
+      // const emplog = new logs({
+      //   em:req.body.em,
+      //   pass:req.body.pass
+      // })
+      // const logged = await emplog.save()
+      res.status(201).render("index")
+    }
+    else{
+      res.send("Wrong Password")
+    }
+  }catch(error){
+    res.status(400).send("Invalid Email")
+  }
 })
 
 // app.get('/index',(req,res) => {
